@@ -1,0 +1,60 @@
+{
+    "note_app": "Not Uygulaması",
+    "header": "Başlık",
+    "content": "İçerik",
+    "new_note": "Yeni Not",
+    "my_notes": "Notlarım",
+    "not_yet": "Henüz notunuz yok.",
+
+
+    "crud": {
+        "create": "Oluştur",
+        "read": "Oku",
+        "update": "Güncelle",
+        "delete": "Sil",
+        "save": "Kaydet",
+        "cancel": "İptal",
+        "edit": "Düzenle",
+        "new": "Yeni",
+        "archive": "Arşivle"
+    },
+
+
+    "error": {
+        "required": "Bu alan zorunludur.",
+        "email": "Geçerli bir e-posta adresi giriniz.",
+        "minlength": "Bu alan en az {{requiredLength}} karakter olmalıdır.",
+        "maxlength": "Bu alan en fazla {{requiredLength}} karakter olmalıdır.",
+        "password": "Şifreniz en az 6 karakter olmalıdır.",
+        "email_exists": "Bu e-posta adresi zaten kullanılmaktadır.",
+        "invalid_credentials": "Geçersiz e-posta veya şifre.",
+        "note_not_found": "Not bulunamadı."
+    },
+
+    "auth":{
+        "login": "Giriş Yap",
+        "register": "Kayıt Ol",
+        "logout": "Çıkış Yap",
+        "email": "E-posta",
+        "password": "Şifre",
+        "name": "Adınız",
+        "lastName": "Soyadınız",
+        "already_have_account": "Zaten hesabınız var mı?",
+        "no_account": "Hesabınız yok mu?",
+        "success_register": "Başarıyla kayıt oldunuz.",
+        "success_login": "Başarıyla giriş yaptınız.",
+        "sign_in_google": "Google ile giriş yap",
+        "success_sign_in_google": "Google ile başarıyla giriş yaptınız."
+    },
+
+    "setting": {
+        "settings": "Ayarlar",
+        "language": "Dil",
+        "dark_mode": "Karanlık Mod",
+        "light_mode": "Aydınlık Mod",
+        "theme": "Tema",
+        "save": "Kaydet",
+        "cancel": "İptal"
+    }
+
+}

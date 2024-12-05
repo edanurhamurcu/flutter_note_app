@@ -1,0 +1,60 @@
+{
+    "note_app": "Note App",
+    "header": "Header",
+    "content": "Content",
+    "new_note": "New Note",
+    "my_notes": "My Notes",
+    "not_yet": "You don't have any notes yet.",
+
+
+    "crud": {
+        "create": "Create",
+        "read": "Read",
+        "update": "Update",
+        "delete": "Delete",
+        "save": "Save",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "new": "New",
+        "archive": "Archive"
+    },
+
+
+    "error": {
+        "required": "This field is required.",
+        "email": "Please enter a valid email address.",
+        "minlength": "This field must be at least {{requiredLength}} characters.",
+        "maxlength": "This field must be at most {{requiredLength}} characters.",
+        "password": "Your password must be at least 6 characters.",
+        "email_exists": "This email address is already in use.",
+        "invalid_credentials": "Invalid email or password.",
+        "note_not_found": "Note not found."
+    },
+
+    "auth":{
+        "login": "Login",
+        "register": "Register",
+        "logout": "Logout",
+        "email": "E-mail",
+        "password": "Password",
+        "name": "Name",
+        "lastName": "Last Name",
+        "already_have_account": "Already have an account?",
+        "no_account": "Don't have an account?",
+        "success_register": "You have successfully registered.",
+        "success_login": "You have successfully logged in.",
+        "sign_in_google": "Sign in with Google",
+        "success_sign_in_google": "You have successfully signed in with Google."
+    },
+
+    "setting": {
+        "settings": "Settings",
+        "language": "Language",
+        "dark_mode": "Dark Mode",
+        "light_mode": "Light Mode",
+        "theme": "Theme",
+        "save": "Save",
+        "cancel": "Cancel"
+    }
+
+}
