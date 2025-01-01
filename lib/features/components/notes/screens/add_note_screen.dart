@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:notes_app/core/utils/snackbar_helper.dart';
 import 'package:notes_app/features/components/notes/providers/notes_provider.dart';
 import 'package:notes_app/init/lang/locale_keys.g.dart';
 import 'package:provider/provider.dart';
@@ -56,6 +57,11 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                     .read<NotesProvider>()
                     .updateNote(widget.id!, newTitle, newContent);
               }
+              SnackbarHelper.showSuccess(
+                  context,
+                  widget.id == null
+                      ? LocaleKeys.crud_success_create.tr()
+                      : LocaleKeys.crud_success_update.tr());
               Navigator.of(context).pop();
             },
           ),

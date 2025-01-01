@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:notes_app/core/utils/loader_overlay.dart';
+import 'package:notes_app/core/utils/wrap_loader.dart';
 import 'package:notes_app/features/components/notes/providers/notes_provider.dart';
 import 'package:notes_app/features/components/notes/screens/widgets/note_list_item.dart';
 import 'package:notes_app/init/lang/locale_keys.g.dart';
-import 'package:notes_app/core/utils/wrap_loader.dart';
-import 'package:notes_app/core/utils/loader_overlay.dart';
 import 'package:provider/provider.dart';
 
 class NotesListScreen extends StatelessWidget {

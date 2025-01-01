@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:notes_app/init/lang/locale_keys.g.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -56,7 +58,7 @@ class AuthProvider extends ChangeNotifier {
       await _saveUser(_user);
       notifyListeners();
     } on FirebaseAuthException catch (e) {
-      throw e.message ?? "Kayıt sırasında bir hata oluştu.";
+      _handleAuthException(e);
     }
   }
 
@@ -73,7 +75,7 @@ class AuthProvider extends ChangeNotifier {
       await _saveUser(_user);
       notifyListeners();
     } on FirebaseAuthException catch (e) {
-      throw e.message ?? "Giriş sırasında bir hata oluştu.";
+      _handleAuthException(e);
     }
   }
 
@@ -96,14 +98,40 @@ class AuthProvider extends ChangeNotifier {
       await _saveUser(_user);
       notifyListeners();
     } on FirebaseAuthException catch (e) {
-      throw e.message ?? "Google ile giriş sırasında bir hata oluştu.";
+      _handleAuthException(e);
     }
   }
 
   Future<void> signOut() async {
     await _auth.signOut();
     _user = null;
+    _isSignUp = false;
     await _saveUser(null);
     notifyListeners();
+  }
+
+  void _handleAuthException(FirebaseAuthException e) {
+    switch (e.code) {
+      case 'email-already-in-use':
+        throw LocaleKeys.error_auth_email_exists.tr();
+      case 'user-not-found':
+        throw LocaleKeys.error_auth_user_not_found.tr();
+      case 'wrong-password':
+        throw LocaleKeys.error_wrong_password.tr();
+      case 'user-disabled':
+        throw LocaleKeys.error_disabled_account.tr();
+      case 'too-many-requests':
+        throw LocaleKeys.error_many_requests.tr();
+      case 'operation-not-allowed':
+        throw LocaleKeys.error_operation_not_allowed.tr();
+      case 'weak-password':
+        throw LocaleKeys.error_weak_password.tr();
+      case 'invalid-email':
+        throw LocaleKeys.error_auth_email_invalid.tr();
+      case 'invalid-credential':
+        throw LocaleKeys.error_auth_invalid_credentials.tr();
+      default:
+        throw e.message ?? "Bir hata oluştu.";
+    }
   }
 }

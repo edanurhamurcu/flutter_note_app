@@ -46,13 +46,18 @@ class NoteListItem extends StatelessWidget {
         if (direction == DismissDirection.startToEnd) {
           if (note.isArchived) {
             notesProvider.unarchiveNote(note.id);
+            SnackbarHelper.showSuccess(
+                context, LocaleKeys.crud_success_unarcive.tr());
           } else {
             notesProvider.archiveNote(note.id);
+            SnackbarHelper.showSuccess(
+                context, LocaleKeys.crud_success_arcive.tr());
           }
           return false;
         } else if (direction == DismissDirection.endToStart) {
           notesProvider.deleteNote(note.id);
-          SnackbarHelper.showSuccess(context, LocaleKeys.crud_delete.tr());
+          SnackbarHelper.showSuccess(
+              context, LocaleKeys.crud_success_delete.tr());
           return true;
         }
         return false;

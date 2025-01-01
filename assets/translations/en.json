@@ -5,6 +5,7 @@
     "new_note": "New Note",
     "my_notes": "My Notes",
     "not_yet": "You don't have any notes yet.",
+    "no_archived_notes": "You don't have any archived notes.",
 
 
     "crud": {
@@ -16,20 +17,37 @@
         "cancel": "Cancel",
         "edit": "Edit",
         "new": "New",
-        "archive": "Archive"
+        "archive": "Archive",
+        "unarchive": "Unarchive",
+        "success_arcive": "Note archived successfully.",
+        "success_unarcive": "Note unarchived successfully.",
+        "success_delete": "Note deleted successfully.",
+        "success_update": "Note updated successfully.",
+        "success_create": "Note created successfully."
     },
 
 
     "error": {
         "required": "This field is required.",
-        "email": "Please enter a valid email address.",
         "minlength": "This field must be at least {{requiredLength}} characters.",
         "maxlength": "This field must be at most {{requiredLength}} characters.",
         "password": "Your password must be at least 6 characters.",
         "email_exists": "This email address is already in use.",
         "invalid_credentials": "Invalid email or password.",
         "note_not_found": "Note not found.",
-        "error_loading_notes": "An error occurred while loading notes."
+        "error_loading_notes": "An error occurred while loading notes.",
+        "auth_password_empty": "Password field cannot be empty.",
+        "auth_password_short": "Password must be at least 6 characters.",
+        "auth_email_empty": "Email field cannot be empty.",
+        "auth_email_invalid": "Please enter a valid email address.",
+        "auth_email_exists": "This email address is already in use.",
+        "auth_invalid_credentials": "Invalid email or password.",
+        "auth_user_not_found": "User not found.",
+        "wrong_password": "Wrong password.",
+        "disabled_account": "Your account has been disabled.",
+        "many_requests": "Too many requests. Please try again later.",
+        "operation_not_allowed": "This operation is not allowed at the moment.",
+        "weak_password": "Your password is too weak."
     },
 
     "auth":{

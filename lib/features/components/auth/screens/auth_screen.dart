@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:notes_app/core/utils/custom_button.dart';
 import 'package:notes_app/core/utils/custom_texfield.dart';
 import 'package:notes_app/core/utils/loader_overlay.dart';
 import 'package:notes_app/core/utils/snackbar_helper.dart';
 import 'package:notes_app/features/components/auth/providers/auth_provider.dart';
-import 'package:notes_app/features/components/auth/screens/widgets/auth_btn.dart';
+import 'package:notes_app/features/components/auth/screens/widgets/auth_fields.dart';
 import 'package:notes_app/features/components/auth/screens/widgets/google_sign_in_btn.dart';
 import 'package:notes_app/features/components/auth/screens/widgets/header.dart';
 import 'package:notes_app/init/lang/locale_keys.g.dart';
@@ -22,6 +23,7 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController surnameController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -33,6 +35,10 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Future<void> handleAuthAction(AuthProvider authProd) async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
     LoaderOverlay().show(context);
     try {
       if (authProd.isSignUp) {
@@ -105,27 +111,25 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 const SizedBox(height: 10),
               ],
-              CustomTextField(
-                controller: emailController,
-                labelText: LocaleKeys.auth_email.tr(),
-              ),
-              const SizedBox(height: 10),
-              CustomTextField(
-                controller: passwordController,
-                labelText: LocaleKeys.auth_password.tr(),
-                obscureText: true,
+              AuthFields(
+                emailController: emailController,
+                passwordController: passwordController,
+                formKey: _formKey,
               ),
               const SizedBox(height: 20),
-              AuthButton(
-                  authProvider: authProvider,
-                  isSignUp: authProvider.isSignUp,
-                  handleAuthAction: handleAuthAction),
+              CustomButton(
+                onPressed: () => handleAuthAction(authProvider),
+                text: authProvider.isSignUp
+                    ? LocaleKeys.auth_register.tr()
+                    : LocaleKeys.auth_login.tr(),
+              ),
               const SizedBox(height: 20),
               _buildToggleAuthMode(authProvider),
               const SizedBox(height: 20),
               GoogleSignInButton(
-                  authProvider: authProvider,
-                  handleGoogleSignIn: handleGoogleSignIn),
+                authProvider: authProvider,
+                handleGoogleSignIn: handleGoogleSignIn,
+              ),
             ],
           ),
         ),

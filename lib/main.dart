@@ -21,10 +21,13 @@ void main() async {
 
   runApp(AppLocalizations(
       child: MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => AuthProvider()),
-    ChangeNotifierProvider(
-        create: (context) => NotesProvider(
-            Provider.of<AuthProvider>(context, listen: false).user?.uid ?? "")),
+    ChangeNotifierProvider(create: (_) => AuthProvider()),
+    ChangeNotifierProxyProvider<AuthProvider, NotesProvider>(
+      create: (context) =>
+          NotesProvider(Provider.of<AuthProvider>(context, listen: false).user),
+      update: (context, authProvider, notesProvider) =>
+          notesProvider!..updateUser(authProvider.user),
+    ),
   ], child: const MyApp())));
 }
 
@@ -35,8 +38,7 @@ void setupWindows() async {
     size: Size(400, 750),
     minimumSize: Size(400, 750),
   );
-
-  windowManager.waitUntilReadyToShow(windowOptions, () async {
+  await windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
     await windowManager.focus();
   });

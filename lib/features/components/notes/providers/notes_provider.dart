@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/features/components/notes/models/note.dart';
 
 class NotesProvider with ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String _userId;
+  User? _user;
   List<Note> _notes = [];
 
-  NotesProvider(this._userId);
+  NotesProvider(this._user);
 
   List<Note> get notes => [..._notes];
 
@@ -32,7 +33,7 @@ class NotesProvider with ChangeNotifier {
     try {
       final snapshot = await _firestore
           .collection('notes')
-          .where('userId', isEqualTo: _userId)
+          .where('userId', isEqualTo: _user?.uid)
           .get();
 
       _notes = snapshot.docs
@@ -52,7 +53,7 @@ class NotesProvider with ChangeNotifier {
         title: title,
         content: content,
         createdTime: DateTime.now(),
-        userId: _userId,
+        userId: _user?.uid ?? '',
       );
 
       final docRef =
@@ -76,7 +77,7 @@ class NotesProvider with ChangeNotifier {
           content: content,
           createdTime: _notes[noteIndex].createdTime,
           updatedTime: DateTime.now(),
-          userId: _userId,
+          userId: _user?.uid ?? '',
           imageUrl: _notes[noteIndex].imageUrl,
           tags: _notes[noteIndex].tags,
         );
@@ -109,7 +110,7 @@ class NotesProvider with ChangeNotifier {
       if (noteIndex >= 0) {
         final archivedNote = Note(
           id: id,
-          userId: _userId,
+          userId: _user?.uid ?? '',
           title: _notes[noteIndex].title,
           content: _notes[noteIndex].content,
           createdTime: _notes[noteIndex].createdTime,
@@ -132,13 +133,12 @@ class NotesProvider with ChangeNotifier {
   }
 
   Future<void> unarchiveNote(String id) async {
-
     try {
       final noteIndex = _notes.indexWhere((note) => note.id == id);
       if (noteIndex >= 0) {
         final unarchivedNote = Note(
           id: id,
-          userId: _userId,
+          userId: _user?.uid ?? '',
           title: _notes[noteIndex].title,
           content: _notes[noteIndex].content,
           createdTime: _notes[noteIndex].createdTime,
@@ -158,5 +158,10 @@ class NotesProvider with ChangeNotifier {
     } catch (e) {
       throw 'Not arşivden çıkarılırken bir hata oluştu: $e';
     }
+  }
+
+  void updateUser(User? user) {
+    _user = user;
+    notifyListeners();
   }
 }

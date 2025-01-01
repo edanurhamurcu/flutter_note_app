@@ -5,6 +5,7 @@
     "new_note": "Yeni Not",
     "my_notes": "Notlarım",
     "not_yet": "Henüz notunuz yok.",
+    "no_archived_notes": "Arşivlenmiş notunuz yok.",
 
 
     "crud": {
@@ -16,20 +17,39 @@
         "cancel": "İptal",
         "edit": "Düzenle",
         "new": "Yeni",
-        "archive": "Arşivle"
+        "archive": "Arşivle",
+        "unarchive": "Arşivden Çıkar",
+        "success_arcive": "Not başarıyla arşivlendi.",
+        "success_unarcive": "Not başarıyla arşivden çıkarıldı.",
+        "success_delete": "Not başarıyla silindi.",
+        "success_update": "Not başarıyla güncellendi.",
+        "success_create": "Not başarıyla oluşturuldu."
+
     },
 
 
     "error": {
         "required": "Bu alan zorunludur.",
-        "email": "Geçerli bir e-posta adresi giriniz.",
         "minlength": "Bu alan en az {{requiredLength}} karakter olmalıdır.",
         "maxlength": "Bu alan en fazla {{requiredLength}} karakter olmalıdır.",
         "password": "Şifreniz en az 6 karakter olmalıdır.",
         "email_exists": "Bu e-posta adresi zaten kullanılmaktadır.",
         "invalid_credentials": "Geçersiz e-posta veya şifre.",
         "note_not_found": "Not bulunamadı.",
-        "error_loading_notes": "Notlar yüklenirken bir hata oluştu."
+        "error_loading_notes": "Notlar yüklenirken bir hata oluştu.",
+        "auth_password_empty": "Şifre alanı boş olamaz.",
+        "auth_password_short": "Şifre en az 6 karakter olmalıdır.",
+        "auth_email_empty": "E-posta alanı boş olamaz.",
+        "auth_email_invalid": "Geçerli bir e-posta adresi giriniz.",
+        "auth_email_exists": "Bu e-posta adresi zaten kullanılmaktadır.",
+        "auth_invalid_credentials": "Geçersiz e-posta veya şifre.",
+        "auth_user_not_found": "Kullanıcı bulunamadı.",
+        "wrong_password": "Yanlış şifre.",
+        "disabled_account": "Hesabınız devre dışı bırakıldı.",
+        "many_requests": "Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyin.",
+        "operation_not_allowed": "Bu işlem şu anda kullanılamıyor.",
+        "weak_password": "Şifreniz çok zayıf."
+
     },
 
     "auth":{

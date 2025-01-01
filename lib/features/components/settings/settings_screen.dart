@@ -38,7 +38,7 @@ class SettingsScreen extends StatelessWidget {
               authProvider.signOut();
               SnackbarHelper.showSuccess(
                   context, LocaleKeys.auth_success_logout.tr());
-              Navigator.pushReplacementNamed(context, AppRoutes.auth);
+              Navigator.pushNamed(context, AppRoutes.auth);
             },
           ),
         ],
