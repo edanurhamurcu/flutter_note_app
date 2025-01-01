@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/features/components/notes/models/note.dart';
 
@@ -10,6 +11,22 @@ class NotesProvider with ChangeNotifier {
   NotesProvider(this._userId);
 
   List<Note> get notes => [..._notes];
+
+  String formatNoteDate(DateTime date, BuildContext context) {
+    final now = DateTime.now();
+    final isToday =
+        now.day == date.day && now.month == date.month && now.year == date.year;
+
+    final locale = EasyLocalization.of(context)?.currentLocale.toString();
+
+    if (isToday) {
+      // Bugünse saat ve dakika göster
+      return DateFormat('HH:mm', locale).format(date);
+    } else {
+      // Bugünden önceyse gün ve ay göster
+      return DateFormat('dd MMMM', locale).format(date);
+    }
+  }
 
   Future<void> fetchNotes() async {
     try {
@@ -111,6 +128,35 @@ class NotesProvider with ChangeNotifier {
       }
     } catch (e) {
       throw 'Not arşivlenirken bir hata oluştu: $e';
+    }
+  }
+
+  Future<void> unarchiveNote(String id) async {
+
+    try {
+      final noteIndex = _notes.indexWhere((note) => note.id == id);
+      if (noteIndex >= 0) {
+        final unarchivedNote = Note(
+          id: id,
+          userId: _userId,
+          title: _notes[noteIndex].title,
+          content: _notes[noteIndex].content,
+          createdTime: _notes[noteIndex].createdTime,
+          updatedTime: DateTime.now(),
+          isArchived: false,
+          imageUrl: _notes[noteIndex].imageUrl,
+          tags: _notes[noteIndex].tags,
+        );
+
+        await _firestore
+            .collection('notes')
+            .doc(id)
+            .update(unarchivedNote.toFirestore());
+        _notes[noteIndex] = unarchivedNote;
+        notifyListeners();
+      }
+    } catch (e) {
+      throw 'Not arşivden çıkarılırken bir hata oluştu: $e';
     }
   }
 }

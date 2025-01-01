@@ -25,6 +25,7 @@ abstract class  LocaleKeys {
   static const error_email_exists = 'error.email_exists';
   static const error_invalid_credentials = 'error.invalid_credentials';
   static const error_note_not_found = 'error.note_not_found';
+  static const error_error_loading_notes = 'error.error_loading_notes';
   static const error = 'error';
   static const auth_login = 'auth.login';
   static const auth_register = 'auth.register';
@@ -39,6 +40,7 @@ abstract class  LocaleKeys {
   static const auth_success_login = 'auth.success_login';
   static const auth_sign_in_google = 'auth.sign_in_google';
   static const auth_success_sign_in_google = 'auth.success_sign_in_google';
+  static const auth_success_logout = 'auth.success_logout';
   static const auth = 'auth';
   static const setting_settings = 'setting.settings';
   static const setting_language = 'setting.language';

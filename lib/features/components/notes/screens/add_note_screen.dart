@@ -4,23 +4,44 @@ import 'package:notes_app/features/components/notes/providers/notes_provider.dar
 import 'package:notes_app/init/lang/locale_keys.g.dart';
 import 'package:provider/provider.dart';
 
-class AddNoteScreen extends StatelessWidget {
+class AddNoteScreen extends StatefulWidget {
   final String? id;
   final String? title;
   final String? content;
 
-  const AddNoteScreen(
-      {super.key, this.id, this.title, this.content});
+  const AddNoteScreen({super.key, this.id, this.title, this.content});
+
+  @override
+  _AddNoteScreenState createState() => _AddNoteScreenState();
+}
+
+class _AddNoteScreenState extends State<AddNoteScreen> {
+  late TextEditingController titleController;
+  late TextEditingController contentController;
+
+  @override
+  void initState() {
+    super.initState();
+    titleController = TextEditingController(text: widget.title);
+    contentController = TextEditingController(text: widget.content);
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    contentController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final titleController = TextEditingController(text: title);
-    final contentController = TextEditingController(text: content);
+    final dateFormat = DateFormat('dd MMMM HH:mm', 'tr_TR');
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            id == null ? LocaleKeys.new_note.tr() : LocaleKeys.crud_edit.tr()),
+        title: Text(widget.id == null
+            ? LocaleKeys.new_note.tr()
+            : LocaleKeys.crud_edit.tr()),
         actions: [
           IconButton(
             icon: const Icon(Icons.check),
@@ -28,12 +49,12 @@ class AddNoteScreen extends StatelessWidget {
               final newTitle = titleController.text;
               final newContent = contentController.text;
 
-              if (id == null) {
-                Provider.of<NotesProvider>(context, listen: false)
-                    .addNote(newTitle, newContent);
+              if (widget.id == null) {
+                context.read<NotesProvider>().addNote(newTitle, newContent);
               } else {
-                Provider.of<NotesProvider>(context, listen: false)
-                    .updateNote(id!, newTitle, newContent);
+                context
+                    .read<NotesProvider>()
+                    .updateNote(widget.id!, newTitle, newContent);
               }
               Navigator.of(context).pop();
             },
@@ -41,7 +62,7 @@ class AddNoteScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -59,7 +80,7 @@ class AddNoteScreen extends StatelessWidget {
               ),
             ),
             Text(
-              DateFormat('dd MMMM HH:mm', 'tr_TR').format(DateTime.now()),
+              dateFormat.format(DateTime.now()),
               style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 10,
@@ -72,6 +93,8 @@ class AddNoteScreen extends StatelessWidget {
                 hintText: LocaleKeys.content.tr(),
                 hintStyle: const TextStyle(color: Colors.grey, fontSize: 16),
               ),
+              maxLines: null,
+              minLines: 5,
             ),
           ],
         ),

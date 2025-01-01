@@ -5,25 +5,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? _user = FirebaseAuth.instance.currentUser;
 
+  User? _user;
+  bool _isSignUp = false;
 
   User? get user => _user;
+  bool get isSignUp => _isSignUp;
 
   AuthProvider() {
-    _auth.authStateChanges().listen((User? user) {
-      _user = user;
-      notifyListeners();
-    });
+    loadUser();
   }
 
   Future<void> loadUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userEmail = prefs.getString('userEmail');
     if (userEmail != null) {
-      _user = _auth.currentUser; 
-    } else {
-      _user = null;
+      _user = _auth.currentUser;
     }
     notifyListeners();
   }
@@ -35,6 +32,11 @@ class AuthProvider extends ChangeNotifier {
     } else {
       await prefs.remove('userEmail');
     }
+  }
+
+  void toggleAuthMode() {
+    _isSignUp = !_isSignUp;
+    notifyListeners();
   }
 
   Future<void> signUpWithEmail({

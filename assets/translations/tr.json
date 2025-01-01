@@ -28,7 +28,8 @@
         "password": "Şifreniz en az 6 karakter olmalıdır.",
         "email_exists": "Bu e-posta adresi zaten kullanılmaktadır.",
         "invalid_credentials": "Geçersiz e-posta veya şifre.",
-        "note_not_found": "Not bulunamadı."
+        "note_not_found": "Not bulunamadı.",
+        "error_loading_notes": "Notlar yüklenirken bir hata oluştu."
     },
 
     "auth":{
@@ -44,7 +45,8 @@
         "success_register": "Başarıyla kayıt oldunuz.",
         "success_login": "Başarıyla giriş yaptınız.",
         "sign_in_google": "Google ile giriş yap",
-        "success_sign_in_google": "Google ile başarıyla giriş yaptınız."
+        "success_sign_in_google": "Google ile başarıyla giriş yaptınız.",
+        "success_logout": "Başarıyla çıkış yaptınız."
     },
 
     "setting": {

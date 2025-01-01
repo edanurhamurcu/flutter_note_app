@@ -28,7 +28,8 @@
         "password": "Your password must be at least 6 characters.",
         "email_exists": "This email address is already in use.",
         "invalid_credentials": "Invalid email or password.",
-        "note_not_found": "Note not found."
+        "note_not_found": "Note not found.",
+        "error_loading_notes": "An error occurred while loading notes."
     },
 
     "auth":{
@@ -44,7 +45,8 @@
         "success_register": "You have successfully registered.",
         "success_login": "You have successfully logged in.",
         "sign_in_google": "Sign in with Google",
-        "success_sign_in_google": "You have successfully signed in with Google."
+        "success_sign_in_google": "You have successfully signed in with Google.",
+        "success_logout": "You have successfully logged out."
     },
 
     "setting": {

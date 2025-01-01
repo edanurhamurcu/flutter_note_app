@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:notes_app/core/utils/navigation/app_routes.dart';
+import 'package:notes_app/core/utils/snackbar_helper.dart';
 import 'package:notes_app/features/components/auth/providers/auth_provider.dart';
-import 'package:notes_app/features/components/auth/screens/auth_screen.dart';
 import 'package:notes_app/features/components/notes/providers/notes_provider.dart';
 import 'package:notes_app/init/lang/locale_keys.g.dart';
 import 'package:provider/provider.dart';
@@ -35,9 +36,9 @@ class SettingsScreen extends StatelessWidget {
             trailing: const Icon(Icons.logout),
             onTap: () {
               authProvider.signOut();
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                return AuthScreen();
-              }));
+              SnackbarHelper.showSuccess(
+                  context, LocaleKeys.auth_success_logout.tr());
+              Navigator.pushReplacementNamed(context, AppRoutes.auth);
             },
           ),
         ],
