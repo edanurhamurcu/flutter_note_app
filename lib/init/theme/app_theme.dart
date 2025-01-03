@@ -29,7 +29,7 @@ class AppTheme {
       trackColor: WidgetStateProperty.all(Colors.amber[200]),
     ),
     cardTheme: CardTheme(
-      color: Colors.grey[900],
+      color: Colors.white,
       elevation: 4,
     ),
   );
@@ -62,6 +62,12 @@ class AppTheme {
     cardTheme: CardTheme(
       color: Colors.black38,
       elevation: 4,
+    ),
+    inputDecorationTheme: const InputDecorationTheme(
+      focusColor: Colors.amber,
+      hoverColor: Colors.red,
+      fillColor: Colors.green,
+      border: InputBorder.none,
     ),
   );
 

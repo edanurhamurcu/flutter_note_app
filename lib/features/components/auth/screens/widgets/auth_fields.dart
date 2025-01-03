@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/init/lang/locale_keys.g.dart';
 
-class AuthFields extends StatelessWidget {
+class AuthFields extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final GlobalKey<FormState> formKey;
@@ -15,13 +15,19 @@ class AuthFields extends StatelessWidget {
   });
 
   @override
+  State<AuthFields> createState() => _AuthFieldsState();
+}
+
+class _AuthFieldsState extends State<AuthFields> {
+  bool _isPasswordVisible = false;
+  @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: Column(
         children: [
           TextFormField(
-            controller: emailController,
+            controller: widget.emailController,
             decoration: InputDecoration(
               labelText: LocaleKeys.auth_email.tr(),
               border: OutlineInputBorder(
@@ -40,14 +46,24 @@ class AuthFields extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormField(
-            controller: passwordController,
+            controller: widget.passwordController,
             decoration: InputDecoration(
               labelText: LocaleKeys.auth_password.tr(),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
+              suffixIcon: IconButton(
+                icon: Icon(_isPasswordVisible
+                    ? Icons.visibility
+                    : Icons.visibility_off),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  });
+                },
+              ),
             ),
-            obscureText: true,
+            obscureText: !_isPasswordVisible,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) {
               if (value == null || value.isEmpty) {

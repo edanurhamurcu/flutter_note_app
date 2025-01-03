@@ -42,13 +42,15 @@
         "auth_email_empty": "E-posta alanı boş olamaz.",
         "auth_email_invalid": "Geçerli bir e-posta adresi giriniz.",
         "auth_email_exists": "Bu e-posta adresi zaten kullanılmaktadır.",
-        "auth_invalid_credentials": "Geçersiz e-posta veya şifre.",
+        "auth_invalid_credentials": "Lütfen bilgilerinizi kontrol ediniz.",
         "auth_user_not_found": "Kullanıcı bulunamadı.",
         "wrong_password": "Yanlış şifre.",
         "disabled_account": "Hesabınız devre dışı bırakıldı.",
         "many_requests": "Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyin.",
         "operation_not_allowed": "Bu işlem şu anda kullanılamıyor.",
-        "weak_password": "Şifreniz çok zayıf."
+        "weak_password": "Şifreniz çok zayıf.",
+        "auth_user_mismatch": "Kullanıcı bilgileri uyuşmuyor.",
+        "auth_requires_recent_login": "Kimlik doğrulama son giriş gerektirir."
 
     },
 
@@ -66,7 +68,15 @@
         "success_login": "Başarıyla giriş yaptınız.",
         "sign_in_google": "Google ile giriş yap",
         "success_sign_in_google": "Google ile başarıyla giriş yaptınız.",
-        "success_logout": "Başarıyla çıkış yaptınız."
+        "success_logout": "Başarıyla çıkış yaptınız.",
+        "password_required": "Şifre alanı zorunludur.",
+        "password_length": "Şifreniz en az 6 karakter olmalıdır.",
+        "current_password": "Mevcut Şifre",
+        "new_password": "Yeni Şifre",
+        "confirm_password": "Şifreyi Onayla",
+        "change_password": "Şifre Değiştir",
+        "password_not_match": "Şifreler eşleşmiyor.",
+        "success_change_password": "Şifreniz başarıyla değiştirildi."
     },
 
     "setting": {

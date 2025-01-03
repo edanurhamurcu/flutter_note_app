@@ -1,3 +1,5 @@
+// ignore_for_file: constant_pattern_never_matches_value_type
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -108,6 +110,24 @@ class AuthProvider extends ChangeNotifier {
     _isSignUp = false;
     await _saveUser(null);
     notifyListeners();
+  }
+
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    try {
+      final user = _auth.currentUser;
+      final credential = EmailAuthProvider.credential(
+        email: user?.email ?? '',
+        password: currentPassword,
+      );
+
+      await user?.reauthenticateWithCredential(credential);
+      await user?.updatePassword(newPassword);
+    } on FirebaseAuthException catch (e) {
+      _handleAuthException(e);
+    }
   }
 
   void _handleAuthException(FirebaseAuthException e) {

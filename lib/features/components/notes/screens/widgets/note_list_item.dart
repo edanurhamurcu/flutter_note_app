@@ -23,84 +23,83 @@ class NoteListItem extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Dismissible(
-      key: Key(note.id),
-      background: note.isArchived
-          ? Container(
-              color: Colors.orange,
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: const Icon(
-                Icons.unarchive_outlined,
-                color: Colors.white,
+        key: Key(note.id),
+        background: note.isArchived
+            ? Container(
+                color: Colors.orange,
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: const Icon(
+                  Icons.unarchive_outlined,
+                  color: Colors.white,
+                ),
+              )
+            : Container(
+                color: Colors.green,
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: const Icon(Icons.archive, color: Colors.white),
               ),
-            )
-          : Container(
-              color: Colors.green,
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: const Icon(Icons.archive, color: Colors.white),
-            ),
-      secondaryBackground: Container(
-        color: Colors.red,
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: const Icon(Icons.delete, color: Colors.white),
-      ),
-      confirmDismiss: (direction) async {
-        if (direction == DismissDirection.startToEnd) {
-          if (note.isArchived) {
-            notesProvider.unarchiveNote(note.id);
+        secondaryBackground: Container(
+          color: Colors.red,
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: const Icon(Icons.delete, color: Colors.white),
+        ),
+        confirmDismiss: (direction) async {
+          if (direction == DismissDirection.startToEnd) {
+            if (note.isArchived) {
+              notesProvider.unarchiveNote(note.id);
+              SnackbarHelper.showSuccess(
+                  context, LocaleKeys.crud_success_unarcive.tr());
+            } else {
+              notesProvider.archiveNote(note.id);
+              SnackbarHelper.showSuccess(
+                  context, LocaleKeys.crud_success_arcive.tr());
+            }
+            return false;
+          } else if (direction == DismissDirection.endToStart) {
+            notesProvider.deleteNote(note.id);
             SnackbarHelper.showSuccess(
-                context, LocaleKeys.crud_success_unarcive.tr());
-          } else {
-            notesProvider.archiveNote(note.id);
-            SnackbarHelper.showSuccess(
-                context, LocaleKeys.crud_success_arcive.tr());
+                context, LocaleKeys.crud_success_delete.tr());
+            return true;
           }
           return false;
-        } else if (direction == DismissDirection.endToStart) {
-          notesProvider.deleteNote(note.id);
-          SnackbarHelper.showSuccess(
-              context, LocaleKeys.crud_success_delete.tr());
-          return true;
-        }
-        return false;
-      },
-      child: Card(
-        color: themeProvider.isDarkMode ? Colors.grey[800] : Colors.white,
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-        child: ListTile(
-          title: Text(
-            note.title,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+        },
+        child: Card(
+          color: themeProvider.isDarkMode ? Colors.black38 : Colors.white,
+          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          child: ListTile(
+            title: Text(
+              note.title,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  note.content,
+                  style: const TextStyle(fontSize: 12),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  notesProvider.formatNoteDate(
+                      note.updatedTime ?? note.createdTime, context),
+                  style: const TextStyle(fontSize: 10),
+                ),
+              ],
+            ),
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                AppRoutes.addNote,
+                arguments: {
+                  'id': note.id,
+                  'title': note.title,
+                  'content': note.content,
+                },
+              );
+            },
           ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                note.content,
-                style: const TextStyle(fontSize: 12),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                notesProvider.formatNoteDate(
-                    note.updatedTime ?? note.createdTime, context),
-                style: const TextStyle(fontSize: 10),
-              ),
-            ],
-          ),
-          onTap: () {
-            Navigator.of(context).pushNamed(
-              AppRoutes.addNote,
-              arguments: {
-                'id': note.id,
-                'title': note.title,
-                'content': note.content,
-              },
-            );
-          },
-        ),
-      ),
-    );
+        ));
   }
 }

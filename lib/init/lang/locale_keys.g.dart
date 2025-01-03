@@ -44,6 +44,8 @@ abstract class  LocaleKeys {
   static const error_many_requests = 'error.many_requests';
   static const error_operation_not_allowed = 'error.operation_not_allowed';
   static const error_weak_password = 'error.weak_password';
+  static const error_auth_user_mismatch = 'error.auth_user_mismatch';
+  static const error_auth_requires_recent_login = 'error.auth_requires_recent_login';
   static const error = 'error';
   static const auth_login = 'auth.login';
   static const auth_register = 'auth.register';
@@ -59,6 +61,14 @@ abstract class  LocaleKeys {
   static const auth_sign_in_google = 'auth.sign_in_google';
   static const auth_success_sign_in_google = 'auth.success_sign_in_google';
   static const auth_success_logout = 'auth.success_logout';
+  static const auth_password_required = 'auth.password_required';
+  static const auth_password_length = 'auth.password_length';
+  static const auth_current_password = 'auth.current_password';
+  static const auth_new_password = 'auth.new_password';
+  static const auth_confirm_password = 'auth.confirm_password';
+  static const auth_change_password = 'auth.change_password';
+  static const auth_password_not_match = 'auth.password_not_match';
+  static const auth_success_change_password = 'auth.success_change_password';
   static const auth = 'auth';
   static const setting_settings = 'setting.settings';
   static const setting_common = 'setting.common';

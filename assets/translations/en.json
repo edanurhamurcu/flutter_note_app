@@ -41,13 +41,15 @@
         "auth_email_empty": "Email field cannot be empty.",
         "auth_email_invalid": "Please enter a valid email address.",
         "auth_email_exists": "This email address is already in use.",
-        "auth_invalid_credentials": "Invalid email or password.",
+        "auth_invalid_credentials": "Please check your credentials.",
         "auth_user_not_found": "User not found.",
         "wrong_password": "Wrong password.",
         "disabled_account": "Your account has been disabled.",
         "many_requests": "Too many requests. Please try again later.",
         "operation_not_allowed": "This operation is not allowed at the moment.",
-        "weak_password": "Your password is too weak."
+        "weak_password": "Your password is too weak.",
+        "auth_user_mismatch": "User mismatch.",
+        "auth_requires_recent_login": "Authentication requires recent login."
     },
 
     "auth":{
@@ -64,7 +66,15 @@
         "success_login": "You have successfully logged in.",
         "sign_in_google": "Sign in with Google",
         "success_sign_in_google": "You have successfully signed in with Google.",
-        "success_logout": "You have successfully logged out."
+        "success_logout": "You have successfully logged out.",
+        "password_required": "Password is required.",
+        "password_length": "Password must be at least 6 characters.",
+        "current_password": "Current Password",
+        "new_password": "New Password",
+        "confirm_password": "Confirm Password",
+        "change_password": "Change Password",
+        "password_not_match": "Passwords do not match.",
+        "success_change_password": "You have successfully changed your password."
     },
 
     "setting": {
