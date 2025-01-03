@@ -61,12 +61,19 @@ abstract class  LocaleKeys {
   static const auth_success_logout = 'auth.success_logout';
   static const auth = 'auth';
   static const setting_settings = 'setting.settings';
+  static const setting_common = 'setting.common';
   static const setting_language = 'setting.language';
+  static const setting_Turkish = 'setting.Turkish';
+  static const setting_English = 'setting.English';
   static const setting_dark_mode = 'setting.dark_mode';
   static const setting_light_mode = 'setting.light_mode';
   static const setting_theme = 'setting.theme';
   static const setting_save = 'setting.save';
   static const setting_cancel = 'setting.cancel';
+  static const setting_account = 'setting.account';
+  static const setting_profile = 'setting.profile';
+  static const setting_change_password = 'setting.change_password';
+  static const setting_select_language = 'setting.select_language';
   static const setting = 'setting';
 
 }

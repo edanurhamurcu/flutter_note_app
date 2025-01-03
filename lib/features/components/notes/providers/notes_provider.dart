@@ -30,6 +30,8 @@ class NotesProvider with ChangeNotifier {
   }
 
   Future<void> fetchNotes() async {
+    if (_user == null) return;
+
     try {
       final snapshot = await _firestore
           .collection('notes')
@@ -162,6 +164,11 @@ class NotesProvider with ChangeNotifier {
 
   void updateUser(User? user) {
     _user = user;
+    if (_user != null) {
+      fetchNotes();
+    } else {
+      _notes = [];
+    }
     notifyListeners();
   }
 }

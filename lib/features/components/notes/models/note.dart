@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Note {
   String id;
-  String userId; // Notun sahibini belirten alan
+  String userId;
   String title;
   String content;
   DateTime createdTime;
@@ -13,7 +13,7 @@ class Note {
 
   Note({
     required this.id,
-    required this.userId, // Eklenen alan
+    required this.userId,
     required this.title,
     required this.content,
     required this.createdTime,

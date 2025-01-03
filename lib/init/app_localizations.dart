@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/core/utils/enums/locales.dart';
 
 @immutable
+
 ///AppLocalizations class is used to manage the localization of the app.
 final class AppLocalizations extends EasyLocalization {
   AppLocalizations({required super.child, super.key})
       : super(
-        supportedLocales: _supportedItems, 
-        path: _path,
-        useOnlyLangCode: true);
+            supportedLocales: _supportedItems,
+            path: _path,
+            useOnlyLangCode: true);
 
   static final List<Locale> _supportedItems = [
     Locales.en.locale,
@@ -18,9 +19,13 @@ final class AppLocalizations extends EasyLocalization {
 
   static const String _path = 'assets/translations';
 
-  static Future<void> changeLocale({
-    required BuildContext context, 
-    required Locales locale}) async {
+  static Future<void> changeLocale(
+      {required BuildContext context, required Locales locale}) async {
     context.setLocale(locale.locale);
+  }
+
+  static Locales currentLocale(BuildContext context) {
+    return Locales.values.firstWhere(
+        (element) => element.locale == EasyLocalization.of(context)?.locale);
   }
 }

@@ -66,59 +66,61 @@ class _NotesScreenState extends State<NotesScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey.shade100,
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-        title: Text(LocaleKeys.my_notes.tr()),
-        bottom: TabBar(
-          tabAlignment: TabAlignment.center,
-          indicator: BoxDecoration(
-            color: Colors.transparent,
+    return Consumer<NotesProvider>(builder: (context, notesProvider, child) {
+      return Scaffold(
+        appBar: AppBar(
+          forceMaterialTransparency: true,
+          title: Text(LocaleKeys.my_notes.tr()),
+          bottom: TabBar(
+            tabAlignment: TabAlignment.center,
+            indicator: BoxDecoration(
+              color: Colors.transparent,
+            ),
+            dividerColor: Colors.transparent,
+            controller: _tabController,
+            tabs: [
+              _buildTabIcon(0, Icons.check_box_outlined),
+              _buildTabIcon(1, Icons.archive_outlined),
+            ],
           ),
-          dividerColor: Colors.transparent,
-          controller: _tabController,
-          tabs: [
-            _buildTabIcon(0, Icons.check_box_outlined),
-            _buildTabIcon(1, Icons.archive_outlined),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                Navigator.pushNamed(context, '/settings').then((_) {
+                  _loadNotes();
+                });
+              },
+            ),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/settings');
-            },
-          ),
-        ],
-      ),
-      body: TabBarView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _tabController,
-        children: [
-          NotesListScreen(
-              isLoading: _isLoading, loadNotes: _loadNotes, tabIndex: 0),
-          NotesListScreen(
-              isLoading: _isLoading, loadNotes: _loadNotes, tabIndex: 1),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amber,
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
+        body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: _tabController,
+          children: [
+            NotesListScreen(
+                isLoading: _isLoading, loadNotes: _loadNotes, tabIndex: 0),
+            NotesListScreen(
+                isLoading: _isLoading, loadNotes: _loadNotes, tabIndex: 1),
+          ],
         ),
-        onPressed: () {
-          Navigator.of(context).pushNamed(
-            AppRoutes.addNote,
-            arguments: {
-              'id': null,
-              'title': '',
-              'content': '',
-            },
-          );
-        },
-      ),
-    );
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).pushNamed(
+              AppRoutes.addNote,
+              arguments: {
+                'id': null,
+                'title': '',
+                'content': '',
+              },
+            );
+          },
+        ),
+      );
+    });
   }
 }

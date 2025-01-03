@@ -147,7 +147,6 @@ class _AuthScreenState extends State<AuthScreen> {
             text: authProvider.isSignUp
                 ? "${LocaleKeys.auth_already_have_account.tr()} "
                 : "${LocaleKeys.auth_no_account.tr()} ",
-            style: const TextStyle(color: Colors.black),
             children: [
               TextSpan(
                 text: authProvider.isSignUp

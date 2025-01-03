@@ -5,6 +5,8 @@ import 'package:notes_app/core/utils/snackbar_helper.dart';
 import 'package:notes_app/features/components/notes/models/note.dart';
 import 'package:notes_app/features/components/notes/providers/notes_provider.dart';
 import 'package:notes_app/init/lang/locale_keys.g.dart';
+import 'package:notes_app/init/theme/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class NoteListItem extends StatelessWidget {
   final Note note;
@@ -18,6 +20,8 @@ class NoteListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Dismissible(
       key: Key(note.id),
       background: note.isArchived
@@ -63,7 +67,7 @@ class NoteListItem extends StatelessWidget {
         return false;
       },
       child: Card(
-        color: Colors.white,
+        color: themeProvider.isDarkMode ? Colors.grey[800] : Colors.white,
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         child: ListTile(
           title: Text(

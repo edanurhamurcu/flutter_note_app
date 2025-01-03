@@ -69,12 +69,19 @@
 
     "setting": {
         "settings": "Settings",
+        "common": "Common",
         "language": "Language",
+        "Turkish": "Turkish",
+        "English": "English",
         "dark_mode": "Dark Mode",
         "light_mode": "Light Mode",
         "theme": "Theme",
         "save": "Save",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "account": "Account",
+        "profile": "Profile",
+        "change_password": "Change Password",
+        "select_language": "Select Language"
     }
 
 }

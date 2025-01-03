@@ -7,6 +7,8 @@ import 'package:notes_app/features/components/notes/providers/notes_provider.dar
 import 'package:notes_app/features/components/splash/splash_screen.dart';
 import 'package:notes_app/firebase_options.dart';
 import 'package:notes_app/init/app_localizations.dart';
+import 'package:notes_app/init/lang/providers/language_provider.dart';
+import 'package:notes_app/init/theme/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -19,16 +21,24 @@ void main() async {
 
   setupWindows();
 
-  runApp(AppLocalizations(
-      child: MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => AuthProvider()),
-    ChangeNotifierProxyProvider<AuthProvider, NotesProvider>(
-      create: (context) =>
-          NotesProvider(Provider.of<AuthProvider>(context, listen: false).user),
-      update: (context, authProvider, notesProvider) =>
-          notesProvider!..updateUser(authProvider.user),
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProxyProvider<AuthProvider, NotesProvider>(
+          create: (context) => NotesProvider(
+              Provider.of<AuthProvider>(context, listen: false).user),
+          update: (context, authProvider, notesProvider) =>
+              notesProvider!..updateUser(authProvider.user),
+        ),
+      ],
+      child: AppLocalizations(
+        child: MyApp(),
+      ),
     ),
-  ], child: const MyApp())));
+  );
 }
 
 void setupWindows() async {
@@ -49,25 +59,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
-          inputDecorationTheme: const InputDecorationTheme(
-            // enabledBorder: OutlineInputBorder(
-            //   borderSide: BorderSide(color: Colors.grey),
-            // ),
-            // focusedBorder: OutlineInputBorder(
-            //   borderSide: BorderSide(color: Colors.blue),
-            // ),
-            border: InputBorder.none,
-          ),
-          useMaterial3: true,
-        ),
+        theme: themeProvider.themeData,
         home: const SplashScreen(),
         initialRoute: AppRoutes.splash,
         onGenerateRoute: AppRoutes.onGenerateRoute);

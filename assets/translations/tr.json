@@ -71,12 +71,19 @@
 
     "setting": {
         "settings": "Ayarlar",
+        "common": "Genel",
         "language": "Dil",
+        "Turkish": "Türkçe",
+        "English": "İngilizce",
         "dark_mode": "Karanlık Mod",
         "light_mode": "Aydınlık Mod",
         "theme": "Tema",
         "save": "Kaydet",
-        "cancel": "İptal"
+        "cancel": "İptal",
+        "account": "Hesap",
+        "profile": "Profil",
+        "change_password": "Şifre Değiştir",
+        "select_language": "Dil Seçin"
     }
 
 }
